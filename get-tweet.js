@@ -1,5 +1,5 @@
 /*
- * get-tweet.js v1.0 by Jimmy King
+ * get-tweet.js v1.0.1 by Jimmy King
  * Licensed under The MIT License
  * Issues and feature requests at:
  * https://github.com/jking90/get-tweet
@@ -28,26 +28,27 @@ GetTweet.process = function (data, instance) {
 
   for (var i = 0; i < instance.options.howMany; i++) {
 
-    var thisTweet = fakeAPI.getElementsByClassName('tweet')[i],
-        tweetContent = thisTweet.getElementsByClassName('e-entry-title')[0],
-        userInfo = thisTweet.getElementsByClassName('u-url profile')[0];
+    var
+      thisTweet = fakeAPI.querySelectorAll('.tweet')[i],
+      tweetContent = thisTweet.querySelectorAll('.e-entry-title')[0],
+      userInfo = thisTweet.querySelectorAll('.u-url.profile')[0];
 
     var thisTweetObj = {
       html: tweetContent.innerHTML,
             // HTML from the tweet
-      isRT: !!thisTweet.getElementsByClassName('retweet-credit').length,
+      isRT: !!thisTweet.querySelectorAll('.retweet-credit').length,
             // Boolean indicates whether this is a retweet
-      link: thisTweet.getElementsByClassName('permalink')[0].href,
+      link: thisTweet.querySelectorAll('.permalink')[0].href,
             // Permalink to tweet
-      name: userInfo.getElementsByClassName('full-name')[0].innerText.replace(/^\s+|\s+$/g, ''),
+      name: userInfo.querySelectorAll('.full-name')[0].innerText.replace(/^\s+|\s+$/g, ''),
             // Full name of user
       pic:  userInfo.getElementsByTagName('img')[0].src,
             // URL for user's profile picture
       text: tweetContent.innerText,
             // Text from tweet (no links)
-      time: Date.parse(thisTweet.getElementsByClassName('permalink')[0].dataset.datetime),
+      time: Date.parse(thisTweet.querySelectorAll('.permalink')[0].getAttribute('data-datetime')),
             // Number of milliseconds since January 1, 1970, 00:00:00 UTC
-      user: userInfo.getElementsByClassName('p-nickname')[0].innerText
+      user: userInfo.querySelectorAll('.p-nickname')[0].innerText
             // User's screen name
     };
 

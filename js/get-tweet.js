@@ -26,8 +26,6 @@ GetTweet.process = function (data, instance) {
 
   fakeAPI.innerHTML = data.body;
 
-  console.log(fakeAPI);
-
   for (var i = 0; i < instance.options.howMany; i++) {
     var thisTweet = fakeAPI.querySelectorAll('.timeline-TweetList-tweet')[i],
         tweetContent = thisTweet.querySelectorAll('.timeline-Tweet-text')[0],
